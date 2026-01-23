@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/解决方案项/">
+    <File Path="deploy.bat" />
+    <File Path="deploy.sh" />
+  </Folder>
+  <Project Path="MockHttp/MockHttp.csproj" Id="bd247962-37a8-4c53-8e81-ae89767f7747" />
+</Solution>
