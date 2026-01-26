@@ -26,16 +26,6 @@ jobs:
             -p:DebugSymbols=false
 
 
-      - name: Copy files via SSH
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port:  ${{ secrets.SSH_PORT }}
-          source: "publish/*"
-          target: "/service/MockHttp"
-
       - name: Deploy to Server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -45,8 +35,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "publish/*"
           target: "/service/MockHttp"
-          recursive: true
-          tar: false   # 关闭 tar
           strip_components: 1
 
       - name: Restart service
