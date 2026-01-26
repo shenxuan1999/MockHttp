@@ -2,7 +2,7 @@ name: .NET 8 Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   deploy:
