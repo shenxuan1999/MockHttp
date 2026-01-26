@@ -21,20 +21,6 @@
   </ItemGroup>
 
 
-  <PropertyGroup>
-    <!-- 自动使用项目名称 -->
-    <ProjectName>$(MSBuildProjectName)</ProjectName>
 
-    <!-- 定义默认参数 -->
-    <DeployUser>root</DeployUser>
-    <DeployHost>38.76.195.112</DeployHost>
-    <DeployAppDir>/service/$(ProjectName)</DeployAppDir>
-    <DeployServiceName>$(ProjectName).service</DeployServiceName>
-    <DeployPublishDir>./MockHttp/bin/Release/net8.0/publish</DeployPublishDir>
-  </PropertyGroup>
-
-  <Target Name="RunDeployAfterVSWebPublish" AfterTargets="AfterPublish">
-    <Exec Command="deploy.bat $(DeployUser) $(DeployHost) $(DeployAppDir) $(DeployServiceName) $(DeployPublishDir)" WorkingDirectory="$(SolutionDir)" />
-  </Target>
 
 </Project>
