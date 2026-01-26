@@ -1,10 +1,13 @@
 @echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
+REM ========== 服务器配置 root/.ssh/authorized_keys  里面放置公钥 配置文件夹以及文件权限   chmod 600 /root/.ssh/authorized_keys ==========
+REM ========== 服务器配置 /etc/ssh/sshd_config的PubkeyAuthentication yes 允许sshkey登陆    ==========
+
 
 REM ========== 默认配置 ==========
 set "DEFAULT_USER=root"
-set "DEFAULT_HOST=115.190.13.222"
+set "DEFAULT_HOST=38.76.195.112"
 set "DEFAULT_APP_DIR=/service/MockHttp"
 set "DEFAULT_SERVICE_NAME=MockHttp.service"
 set "DEFAULT_PUBLISH_DIR=MockHttp\bin\Release\net8.0\publish"

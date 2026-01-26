@@ -6,9 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
+
   <ItemGroup>
 
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
@@ -29,10 +27,10 @@
 
     <!-- 定义默认参数 -->
     <DeployUser>root</DeployUser>
-    <DeployHost>115.190.13.222</DeployHost>
+    <DeployHost>38.76.195.112</DeployHost>
     <DeployAppDir>/service/$(ProjectName)</DeployAppDir>
     <DeployServiceName>$(ProjectName).service</DeployServiceName>
-    <DeployPublishDir>MockHttp/bin/Release/net8.0/publish</DeployPublishDir>
+    <DeployPublishDir>./MockHttp/bin/Release/net8.0/publish</DeployPublishDir>
   </PropertyGroup>
 
   <Target Name="RunDeployAfterVSWebPublish" AfterTargets="AfterPublish">
