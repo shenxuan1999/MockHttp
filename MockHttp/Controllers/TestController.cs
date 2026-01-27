@@ -13,6 +13,6 @@ public class TestController : ControllerBase
     [HttpGet]
     public string GetNum()
     {
-        return "444";
+        return "666";
     }
 }
