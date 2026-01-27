@@ -1,8 +1,7 @@
 @echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
-REM ========== 服务器配置 root/.ssh/authorized_keys  里面放置公钥 配置文件夹以及文件权限   chmod 600 /root/.ssh/authorized_keys ==========
-REM ========== 服务器配置 /etc/ssh/sshd_config的PubkeyAuthentication yes 允许sshkey登陆    ==========
+
 
 
 REM ========== 默认配置 ==========

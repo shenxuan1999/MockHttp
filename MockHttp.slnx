@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/解决方案项/">
     <File Path=".gitignore" />
+    <File Path="CICD.md" />
     <File Path="deploy.bat" />
     <File Path="deploy.sh" />
   </Folder>

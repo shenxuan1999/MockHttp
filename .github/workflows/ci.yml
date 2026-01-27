@@ -1,8 +1,11 @@
 name: .NET 8 Deploy
 
+env:
+  PROJECT_NAME: MockHttp
+
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   deploy:
@@ -19,12 +22,11 @@ jobs:
 
       - name: Publish WebApi
         run: |
-          dotnet publish MockHttp/MockHttp.csproj \
+          dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj \
             -c Release \
             -o publish \
             -p:DebugType=None \
             -p:DebugSymbols=false
-
 
       - name: Deploy to Server
         uses: appleboy/scp-action@v0.1.7
@@ -45,4 +47,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             systemctl restart MockHttp.service
-           
