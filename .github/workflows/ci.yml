@@ -1,7 +1,7 @@
 name: .NET 8 Deploy
 
 env:
-  PROJECT_NAME: MockHttp
+  PROJECT_NAME: ${{ github.repository }}
 
 on:
   push:
@@ -20,13 +20,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+
+      - name: Print PROJECT_NAME
+        run: echo "PROJECT_NAME = $PROJECT_NAME"
+
       - name: Publish WebApi
         run: |
-          dotnet publish $PROJECT_NAME/$PROJECT_NAME.csproj \
-            -c Release \
-            -o publish \
-            -p:DebugType=None \
-            -p:DebugSymbols=false
+          dotnet publish -c Release -o publish -p:DebugType=None -p:DebugSymbols=false
+          
 
       - name: Deploy to Server
         uses: appleboy/scp-action@v1
@@ -36,7 +37,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "publish/*"
-          target: "/service/MockHttp"
+          target: "/service/$PROJECT_NAME"
           strip_components: 1
 
       - name: Restart service
@@ -46,4 +47,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            systemctl restart MockHttp.service
+            systemctl restart $PROJECT_NAME.service
