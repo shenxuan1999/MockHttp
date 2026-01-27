@@ -1,5 +1,7 @@
 # ssh登录
 
+## 配置公钥
+
 在服务器配置一下ssh公钥，root用户在/root/.ssh/authorized_keys,有几个公钥就配置几个 每行一个
 
 chmod 600 /root/.ssh/authorized_keys
@@ -10,11 +12,13 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJpl+XhuaMZfFR6mMu1tBG4DIfxQ8BcE2M5HLRFsJo
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOyVqz9YDTOC32NtgUu1aoZe7TDxDS9TPAAUKoTzi0jY shenxuan1999@gmail.com
 ```
 
-
+## 配置允许ssh认证
 
 服务器配置 /etc/ssh/sshd_config的PubkeyAuthentication yes 允许sshkey登陆
 
+```sh
 systemctl restart ssh.service
+```
 
 
 
@@ -43,7 +47,7 @@ systemctl restart ssh.service
 
 脚本
 
-deploy.bat
+## **deploy.bat**
 
 ```sh
 @echo off
@@ -99,7 +103,7 @@ echo ✅ 部署完成
 endlocal
 ```
 
-deploy.sh
+## **deploy.sh**
 
 ```sh
 #!/bin/bash
@@ -139,11 +143,15 @@ ssh $USER@$HOST "sudo systemctl start $SERVICE_NAME"
 echo "✅ 部署完成"
 ```
 
+
+
+
+
 # 2.GitHub Action
 
 解决方案同级下新建.github/workflows/ci.yml
 
-如果scp拷贝到服务器需要压缩解压，服务器需要提前安装解压缩软件 具体看依赖的脚本内容
+**注意:如果scp拷贝到服务器需要压缩解压，服务器需要提前安装解压缩软件 具体看依赖的脚本内容**
 
 ```yaml
 name: .NET 8 Deploy
@@ -199,6 +207,8 @@ jobs:
 
 ```
 
+## 变量设置
+
 > 对应的仓库需要设置变量 ip 端口 用户 私钥
 >
 > 仓库-   Settings-    secrets and variables   的Repository secrets
@@ -211,7 +221,7 @@ jobs:
 
 
 
-yml的里面的变量使用
+## yml的里面的变量使用
 
 | 场景            | 用法                      |
 | --------------- | ------------------------- |
@@ -219,3 +229,7 @@ yml的里面的变量使用
 | `with:` 参数    | `${{ env.PROJECT_NAME }}` |
 | `if:` 条件      | `${{ env.PROJECT_NAME }}` |
 | job / step 名称 | `${{ env.PROJECT_NAME }}` |
+
+## scp的action
+
+https://github.com/marketplace/actions/scp-files
