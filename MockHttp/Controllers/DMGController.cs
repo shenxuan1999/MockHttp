@@ -73,7 +73,7 @@ public class DMGController : ControllerBase
         {
             message = new
             {
-                code = "500",
+                code = "200",
                 //msg="推送成功"
                 msg = "推送失败，单据不存在"
             }

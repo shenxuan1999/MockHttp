@@ -7,7 +7,7 @@ REM ========== 服务器配置 /etc/ssh/sshd_config的PubkeyAuthentication yes �
 
 REM ========== 默认配置 ==========
 set "DEFAULT_USER=root"
-set "DEFAULT_HOST=38.76.195.112"
+set "DEFAULT_HOST=115.190.13.222"
 set "DEFAULT_APP_DIR=/service/MockHttp"
 set "DEFAULT_SERVICE_NAME=MockHttp.service"
 set "DEFAULT_PUBLISH_DIR=MockHttp\bin\Release\net8.0\publish"
