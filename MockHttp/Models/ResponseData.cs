@@ -8,6 +8,7 @@ public class ResponseData
     public int Page { get; set; }
     public List<string>? List { get; set; }
 }
+
 public class Query
 {
     public int page { get; set; }
