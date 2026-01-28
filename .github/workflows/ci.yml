@@ -53,4 +53,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            systemctl list-units --type=service | grep -q "${{ env.PROJECT_NAME }}.service" && sudo systemctl restart ${{ env.PROJECT_NAME }}.service || echo "service not found, skip restart"
+            sudo systemctl restart ${{ env.PROJECT_NAME }}.service

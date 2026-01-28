@@ -6,5 +6,5 @@ global using Serilog.Events;
 global using Serilog.Templates;
 global using Serilog.Templates.Themes;
 global using Microsoft.AspNetCore.Mvc;
-
+global using System.Diagnostics;
 global using MockHttp.Models;
