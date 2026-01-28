@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/解决方案项/">
+    <File Path=".github/workflows/ci.yml" />
     <File Path=".gitignore" />
     <File Path="CICD.md" />
     <File Path="deploy.bat" />
