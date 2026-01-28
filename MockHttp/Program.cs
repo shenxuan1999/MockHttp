@@ -1,5 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://*:5001"); // 允许所有IP访问
+// 只有在没有通过命令行或环境变量指定 URL 时才设置默认值
+var urls = builder.Configuration["urls"];
+if (string.IsNullOrEmpty(urls))
+{
+    builder.WebHost.UseUrls("http://*:5001"); // 默认值
+}
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
