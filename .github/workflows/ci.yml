@@ -40,7 +40,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "publish/*"
-          target: "/service/$PROJECT_NAME"
+          target: "/service/${{ env.PROJECT_NAME }}"
           strip_components: 1
 
       - name: Restart service
@@ -50,4 +50,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            systemctl restart $PROJECT_NAME.service
+            sudo systemctl restart ${{ env.PROJECT_NAME }}.service
