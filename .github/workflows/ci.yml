@@ -19,7 +19,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-
+          #把仓库名称截取最后一部分 写入环境变量
       - name: Get PROJECT_NAME
         run: |
           echo "PROJECT_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
@@ -53,4 +53,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo systemctl restart ${{ env.PROJECT_NAME }}.service
+            systemctl list-units --type=service | grep -q "${{ env.PROJECT_NAME }}.service" && sudo systemctl restart ${{ env.PROJECT_NAME }}.service || echo "service not found, skip restart"
+
