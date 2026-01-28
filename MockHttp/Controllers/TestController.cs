@@ -7,12 +7,9 @@ namespace MockHttp.Controllers;
 public class TestController : ControllerBase
 {
 
-
-
-
     [HttpGet]
     public string GetNum()
     {
-        return "9990";
+        return "99901111";
     }
 }

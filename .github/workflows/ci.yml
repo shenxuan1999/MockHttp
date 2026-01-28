@@ -1,7 +1,5 @@
 name: .NET 8 Deploy
 
-  
-
 on:
   push:
     branches: ["master"]
@@ -19,22 +17,23 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-          #�Ѳֿ����ƽ�ȡ���һ���� д�뻷������
+      #shen/MockHttp  拿仓库的最后名称写入环境变量
       - name: Get PROJECT_NAME
         run: |
-          echo "PROJECT_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
           echo "PROJECT_NAME = ${GITHUB_REPOSITORY##*/}"
+          echo "PROJECT_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
 
+      #打印环境变量
       - name: Print PROJECT_NAME (expression)
         run: |
           echo "PROJECT_NAME=${{ env.PROJECT_NAME }}"
 
-
+      #发布到publish
       - name: Publish WebApi
         run: |
           dotnet publish -c Release -o publish -p:DebugType=None -p:DebugSymbols=false
-          
 
+      #同步到服务器  仓库要配置密钥  服务器安装tar
       - name: Deploy to Server
         uses: appleboy/scp-action@v1
         with:
@@ -46,6 +45,7 @@ jobs:
           target: "/service/${{ env.PROJECT_NAME }}"
           strip_components: 1
 
+      #重启服务
       - name: Restart service
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -54,4 +54,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             systemctl list-units --type=service | grep -q "${{ env.PROJECT_NAME }}.service" && sudo systemctl restart ${{ env.PROJECT_NAME }}.service || echo "service not found, skip restart"
-
