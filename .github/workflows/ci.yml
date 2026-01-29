@@ -23,6 +23,15 @@ jobs:
           echo "PROJECT_NAME = ${GITHUB_REPOSITORY##*/}"
           echo "PROJECT_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
 
+
+      #判断是否写入环境变量
+      - name: Safety check
+        run: |
+          if [ -z "${{ env.PROJECT_NAME }}" ]; then
+          echo "PROJECT_NAME is empty, abort deploy"
+          exit 1
+          fi
+
       #打印环境变量
       - name: Print PROJECT_NAME (expression)
         run: |
@@ -31,7 +40,7 @@ jobs:
       #发布到publish
       - name: Publish WebApi
         run: |
-          dotnet publish -c Release -o publish -p:DebugType=None -p:DebugSymbols=false
+          dotnet publish -r linux-x64 -c Release -o ./publish -p:DebugType=None -p:DebugSymbols=false
 
       #同步到服务器  仓库要配置密钥  服务器安装tar
       - name: Deploy to Server
@@ -42,7 +51,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "publish/*"
-          target: "/service/${{ env.PROJECT_NAME }}"
+          target: "/Sxx/Service/${{ env.PROJECT_NAME }}"
           strip_components: 1
 
       #重启服务
@@ -53,4 +62,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo systemctl restart ${{ env.PROJECT_NAME }}.service
+            sudo systemctl restart Sxx.${{ env.PROJECT_NAME }}.service
