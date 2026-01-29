@@ -23,7 +23,6 @@ jobs:
           echo "PROJECT_NAME = ${GITHUB_REPOSITORY##*/}"
           echo "PROJECT_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
 
-
       #判断是否写入环境变量
       - name: Safety check
         run: |
@@ -41,6 +40,16 @@ jobs:
       - name: Publish WebApi
         run: |
           dotnet publish -r linux-x64 -c Release -o ./publish -p:DebugType=None -p:DebugSymbols=false
+
+      #停止服务
+      - name: Stop service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo systemctl stop Sxx.${{ env.PROJECT_NAME }}.service
 
       #同步到服务器  仓库要配置密钥  服务器安装tar
       - name: Deploy to Server
