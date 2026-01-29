@@ -1,13 +1,5 @@
 ﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:61025",
-      "sslPort": 0
-    }
-  },
+
   "profiles": {
     "MockHttp": {
       "commandName": "Project",
@@ -16,16 +8,14 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MES__AppId": "MockHttp",
+        "MES__AppPort": "5001",
+        "MES__AppPrefix": "mh",
+        "MES__Gateway": "http:192.168.0.203:10000:mes/api/{0}/{{0}}",
+        "Urls": "http://localhost:5001"
       }
     }
-  }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json"
 }
