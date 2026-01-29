@@ -12,9 +12,5 @@ public class TestController : ControllerBase
     {
         return "99901111";
     }
-    [HttpGet]
-    public string GetNum2()
-    {
-        return "99901111";
-    }
+   
 }
