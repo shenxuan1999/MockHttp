@@ -1,11 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
-//// 只有在没有通过命令行或环境变量指定 URL 时才设置默认值
-//var urls = builder.Configuration["urls"];
-//if (string.IsNullOrEmpty(urls))
-//{
-//    builder.WebHost.UseUrls("http://*:5001"); // 默认值
-//}
+builder.Configuration.AddCommandLine(args);
 
+
+var appid = builder.Configuration["MES:AppId"];
+Console.WriteLine("命令行参数appid"+appid);
+
+var DAPR_PATH = builder.Configuration["DAPR_PATH"];
+Console.WriteLine("环境变量参数DAPR_PATH" + DAPR_PATH);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
