@@ -1,4 +1,6 @@
-var builder = WebApplication.CreateBuilder(args);
+using MockHttp;
+
+var builder = MesWebApplication.CreateMesWebAppBuilder(args);
 builder.Configuration.AddCommandLine(args);
 
 
