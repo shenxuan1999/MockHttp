@@ -4,11 +4,11 @@ var builder = MesWebApplication.CreateMesWebAppBuilder(args);
 //builder.Configuration.AddCommandLine(args);
 
 
-var appid = builder.Configuration["MES:AppId"];
-Console.WriteLine("命令行参数appid"+appid);
+//var appid = builder.Configuration["MES:AppId"];
+//Console.WriteLine("命令行参数appid"+appid);
 
-var DAPR_PATH = builder.Configuration["DAPR_PATH"];
-Console.WriteLine("环境变量参数DAPR_PATH" + DAPR_PATH);
+//var DAPR_PATH = builder.Configuration["DAPR_PATH"];
+//Console.WriteLine("环境变量参数DAPR_PATH" + DAPR_PATH);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -57,6 +57,17 @@ builder.Host.UseSerilog((context, _, configuration) =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+// 创建 ILogger
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+// 读取配置
+var appid = builder.Configuration["MES:AppId"];
+logger.LogInformation("命令行参数 appid: {AppId}", appid);
+
+var DAPR_PATH = builder.Configuration["DAPR_PATH"];
+logger.LogInformation("环境变量参数 DAPR_PATH: {DaprPath}", DAPR_PATH);
+
 
 app.UseSwagger();
 app.UseSwaggerUI();
