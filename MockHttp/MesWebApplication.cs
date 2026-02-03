@@ -47,6 +47,9 @@ public static class MesWebApplication
                 Environment.SetEnvironmentVariable(variable, text2.Substring(num, text2.Length - num));
             }
         }
+
+
+        //WebApplicationOptions.Args会把命令行参数传递进去  所以相当于普通的var builder = WebApplication.CreateBuilder();builder.Configuration.AddCommandLine(args);
         return WebApplication.CreateBuilder(new WebApplicationOptions
         {
             Args = args,

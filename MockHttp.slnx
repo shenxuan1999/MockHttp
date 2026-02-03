@@ -4,6 +4,7 @@
     <File Path=".gitignore" />
     <File Path="deploy.bat" />
     <File Path="deploy.sh" />
+    <File Path="DeployRemark.md" />
     <File Path="README.md" />
   </Folder>
   <Project Path="MockHttp/MockHttp.csproj" Id="bd247962-37a8-4c53-8e81-ae89767f7747" />

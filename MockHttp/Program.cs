@@ -1,7 +1,7 @@
 using MockHttp;
 
 var builder = MesWebApplication.CreateMesWebAppBuilder(args);
-
+var builder2 = WebApplication.CreateBuilder(args);
 
 var appid = builder.Configuration["MES:AppId"];
 Console.WriteLine("ÃüÁîĞĞ²ÎÊıappid" + appid);
